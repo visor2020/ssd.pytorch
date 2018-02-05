@@ -51,23 +51,15 @@ def cv2_demo(net, transform, input_video):
 
         cv2.namedWindow('frame', 0)
         cv2.resizeWindow('frame', 960, 720)
-        ret, bgr_image = video.read()
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         vw = cv2.VideoWriter("./test123.mp4", fourcc, 30.0, (640, 480))
-        if ret:
+
+        while video.isOpened():
+            ret, bgr_image = video.read()
             frame = predict(bgr_image)
             vw.write(frame)
-            print('a')
-            key = cv2.waitKey(1) & 0xFF
-            if key == ord('p'):  # pause
-                print('k')
-                while True:
-                    key2 = cv2.waitKey(1) or 0xff
-                    cv2.imshow('frame', frame)
-                    if key2 == ord('p'):  # resume
-                        break
             cv2.imshow('frame', frame)
-            if key == 27:  # exit
+            if cv2.waitKey(1) & 0xFF == ord('p'):
                 break
 
 if __name__ == '__main__':
