@@ -46,21 +46,29 @@ def cv2_demo(net, transform, input_video):
     print("[INFO] starting threaded video stream...")
     # stream = WebcamVideoStream(src=0).start()  # default camera
 
-    while True:
-        video = cv2.VideoCapture(input_video)
 
-        cv2.namedWindow('frame', 0)
-        cv2.resizeWindow('frame', 960, 720)
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        vw = cv2.VideoWriter("./test123.mp4", fourcc, 30.0, (640, 480))
+    video = cv2.VideoCapture(input_video)
 
-        while video.isOpened():
-            ret, bgr_image = video.read()
-            frame = predict(bgr_image)
-            vw.write(frame)
-            cv2.imshow('frame', frame)
-            if cv2.waitKey(1) & 0xFF == ord('p'):
-                break
+    # cv2.namedWindow('frame', 0)
+    # cv2.resizeWindow('frame', 960, 720)
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    # 크기를 frame.shape로 넣어주면좋음
+    vw = cv2.VideoWriter("./test1231.mp4", fourcc, 30.0, (640, 360))
+    idx = 0
+    while video.isOpened():
+        # print('a')
+        ret, bgr_image = video.read()
+        frame = predict(bgr_image)
+        vw.write(frame)
+        print(frame.shape)
+        # cv2.imshow('frame', frame)
+        # print('b')
+        idx +=1
+        if idx%50 == 0:
+            print(idx)
+        if cv2.waitKey(1) & 0xFF == ord('p'):
+            break
+
 
 if __name__ == '__main__':
     import sys
