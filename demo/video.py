@@ -15,6 +15,8 @@ parser.add_argument('--cuda', default=False, type=bool,
                     help='Use cuda to train model')
 parser.add_argument('--video', default='data/celeb.mp4',
                     type=str, help='Test image')
+parser.add_argument('--live', default=True, type=bool,
+                    help='use live camera')
 
 args = parser.parse_args()
 
@@ -22,7 +24,7 @@ COLORS = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
 FONT = cv2.FONT_HERSHEY_SIMPLEX
 
 
-def cv2_demo(net, transform, input_video):
+def cv2_demo(net, transform, input_video, live):
     def predict(frame):
         height, width = frame.shape[:2]
         x = torch.from_numpy(transform(frame)[0]).permute(2, 0, 1)
@@ -46,23 +48,18 @@ def cv2_demo(net, transform, input_video):
     print("[INFO] starting threaded video stream...")
     # stream = WebcamVideoStream(src=0).start()  # default camera
 
+    if live:
+        video = cv2.VideoCapture(0)
+    else:
+        video = cv2.VideoCapture(input_video)
 
-    video = cv2.VideoCapture(input_video)
-
-    # cv2.namedWindow('frame', 0)
-    # cv2.resizeWindow('frame', 960, 720)
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    # 크기를 frame.shape로 넣어주면좋음
     vw = cv2.VideoWriter("./test1231.mp4", fourcc, 30.0, (640, 360))
     idx = 0
     while video.isOpened():
-        # print('a')
         ret, bgr_image = video.read()
         frame = predict(bgr_image)
         vw.write(frame)
-        print(frame.shape)
-        # cv2.imshow('frame', frame)
-        # print('b')
         idx +=1
         if idx%50 == 0:
             print(idx)
@@ -84,8 +81,9 @@ if __name__ == '__main__':
     input_video = args.video
     # print(input_video)
     fps = FPS().start()
+    live = args.live
     # stop the timer and display FPS information
-    cv2_demo(net.eval(), transform, input_video)
+    cv2_demo(net.eval(), transform, input_video, live)
     fps.stop()
 
     print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))
