@@ -15,13 +15,13 @@ parser.add_argument('--cuda', default=False, type=bool,
                     help='Use cuda to train model')
 parser.add_argument('--video', default='data/celeb.mp4',
                     type=str, help='Test image')
-parser.add_argument('--live', default=True, type=bool,
+parser.add_argument('--live', default=False, type=bool,
                     help='use live camera')
 
 args = parser.parse_args()
 
 COLORS = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
-FONT = cv2.FONT_HERSHEY_SIMPLEX
+FONT = cv2.FONT_HERSHEY_PLAIN
 
 
 def cv2_demo(net, transform, input_video, live):
@@ -36,11 +36,20 @@ def cv2_demo(net, transform, input_video, live):
         for i in range(detections.size(1)):
             j = 0
             while detections[0, i, j, 0] >= 0.6:
+                score = detections[0, i, j, 0]
                 pt = (detections[0, i, j, 1:] * scale).cpu().numpy()
-                cv2.rectangle(frame, (int(pt[0]), int(pt[1])), (int(pt[2]),
-                                                                int(pt[3])), COLORS[i % 3], 2)
-                cv2.putText(frame, labelmap[i - 1], (int(pt[0]), int(pt[1])), FONT,
-                            2, (255, 255, 255), 2, cv2.LINE_AA)
+                label_name = labelmap[i - 1]
+                display_txt = '%s: %.2f' % (label_name, score) # % 디버깅용
+                # print('i :', i, 'pt :', pt, 'name :', display_txt)
+                if label_name == 'person':
+                    cv2.rectangle(frame, (int(pt[0]), int(pt[1])), (int(pt[2]),
+                                                                    int(pt[3])), COLORS[i % 3], 2)
+                    cv2.putText(frame, display_txt, (int(pt[0]), int(pt[1])), FONT,
+                                2, (255, 255, 255), 2, cv2.LINE_AA)
+                else:
+                    pass
+                # print(i, j)
+                # j+1 은 총 detecting 개수를 뜻함
                 j += 1
         return frame
 
@@ -54,12 +63,13 @@ def cv2_demo(net, transform, input_video, live):
         video = cv2.VideoCapture(input_video)
 
     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    vw = cv2.VideoWriter("./test1231.mp4", fourcc, 30.0, (640, 360))
+    vw = cv2.VideoWriter("./test12311.mp4", fourcc, 30.0, (640, 360))
     idx = 0
     while video.isOpened():
         ret, bgr_image = video.read()
         frame = predict(bgr_image)
         vw.write(frame)
+        # print(frame.shape)
         idx +=1
         if idx%50 == 0:
             print(idx)
