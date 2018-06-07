@@ -97,35 +97,39 @@ You can specify the parameters listed in the `eval.py` file by flagging them or 
 
 | Original | Converted weiliu89 weights | From scratch w/o data aug | From scratch w/ data aug |
 |:-:|:-:|:-:|:-:|
-| 77.2 % | 77.26 % | 58.12% | 77.49 % |
+| 77.2 % | 77.26 % | 58.12% | 77.57 % |
 
 ##### Evaluation report for the current version
 
 VOC07 metric? Yes
 
---batch_size 28
+Because My GPU is GTX1060, it only has 6G memeory.
+So I change the batch_size to 24.
 
-AP for aeroplane = 0.8207<br />
-AP for bicycle = 0.8568<br />
-AP for bird = 0.7546<br />
-AP for boat = 0.6952<br />
-AP for bottle = 0.5019<br />
-AP for bus = 0.8479<br />
-AP for car = 0.8584<br />
-AP for cat = 0.8734<br />
-AP for chair = 0.6136<br />
-AP for cow = 0.8243<br />
-AP for diningtable = 0.7906<br />
-AP for dog = 0.8566<br />
-AP for horse = 0.8714<br />
-AP for motorbike = 0.8403<br />
+--batch_size 24
+
+AP for aeroplane = 0.7996<br />
+AP for bicycle = 0.8466<br />
+AP for bird = 0.7543<br />
+AP for boat = 0.7005<br />
+AP for bottle = 0.5104<br />
+AP for bus = 0.8485<br />
+AP for car = 0.8642<br />
+AP for cat = 0.8769<br />
+AP for chair = 0.6245<br />
+AP for cow = 0.8208<br />
+AP for diningtable = 0.7820<br />
+AP for dog = 0.8539<br />
+AP for horse = 0.8732<br />
+AP for motorbike = 0.8473<br />
 AP for person = 0.7895<br />
-AP for pottedplant = 0.5069<br />
-AP for sheep = 0.7767<br />
-AP for sofa = 0.7894<br />
-AP for train = 0.8623<br />
-AP for tvmonitor = 0.7670<br />
-Mean AP = 0.7749<br />
+AP for pottedplant = 0.5291<br />
+AP for sheep = 0.7550<br />
+AP for sofa = 0.7960<br />
+AP for train = 0.8688<br />
+AP for tvmonitor = 0.7735<br />
+Mean AP = 0.7757<br />
+
 
 
 ##### FPS
