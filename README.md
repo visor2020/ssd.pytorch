@@ -95,6 +95,13 @@ You can specify the parameters listed in the `eval.py` file by flagging them or 
 
 ##### mAP
 
+Because My GPU is GTX1060, it only has 6G memeory.
+So I change the batch_size to 24.
+
+--batch_size 24
+
+The bottom was tested in 120000 iterations net paragrams.
+
 | Original | Converted weiliu89 weights | From scratch w/o data aug | From scratch w/ data aug |
 |:-:|:-:|:-:|:-:|
 | 77.2 % | 77.26 % | 58.12% | 77.57 % |
@@ -102,11 +109,6 @@ You can specify the parameters listed in the `eval.py` file by flagging them or 
 ##### Evaluation report for the current version
 
 VOC07 metric? Yes
-
-Because My GPU is GTX1060, it only has 6G memeory.
-So I change the batch_size to 24.
-
---batch_size 24
 
 AP for aeroplane = 0.7996<br />
 AP for bicycle = 0.8466<br />
@@ -129,6 +131,74 @@ AP for sofa = 0.7960<br />
 AP for train = 0.8688<br />
 AP for tvmonitor = 0.7735<br />
 Mean AP = 0.7757<br />
+
+
+
+The bottom was tested in 110000 iterations net paragrams.
+
+| Original | Converted weiliu89 weights | From scratch w/o data aug | From scratch w/ data aug |
+|:-:|:-:|:-:|:-:|
+| 77.2 % | 77.26 % | 58.12% | 77.67 % |
+
+##### Evaluation report for the current version
+
+VOC07 metric? Yes
+
+AP for aeroplane = 0.7997<br />
+AP for bicycle = 0.8461<br />
+AP for bird = 0.7607<br />
+AP for boat = 0.6971<br />
+AP for bottle = 0.5117<br />
+AP for bus = 0.8484<br />
+AP for car = 0.8655<br />
+AP for cat = 0.8751<br />
+AP for chair = 0.6240<br />
+AP for cow = 0.8331<br />
+AP for diningtable = 0.7834<br />
+AP for dog = 0.8541<br />
+AP for horse = 0.8725<br />
+AP for motorbike = 0.8480<br />
+AP for person = 0.7892<br />
+AP for pottedplant = 0.5308<br />
+AP for sheep = 0.7595<br />
+AP for sofa = 0.7937<br />
+AP for train = 0.8692<br />
+AP for tvmonitor = 0.7719<br />
+Mean AP = 0.7767<br />
+
+
+
+The bottom was tested in 110000 iterations net paragrams.
+
+| Original | Converted weiliu89 weights | From scratch w/o data aug | From scratch w/ data aug |
+|:-:|:-:|:-:|:-:|
+| 77.2 % | 77.26 % | 58.12% | 77.69 % |
+
+##### Evaluation report for the current version
+
+VOC07 metric? Yes
+
+AP for aeroplane = 0.7956<br />
+AP for bicycle = 0.8471<br />
+AP for bird = 0.7632<br />
+AP for boat = 0.7035<br />
+AP for bottle = 0.5118<br />
+AP for bus = 0.8479<br />
+AP for car = 0.8665<br />
+AP for cat = 0.8802<br />
+AP for chair = 0.6217<br />
+AP for cow = 0.8159<br />
+AP for diningtable = 0.7941<br />
+AP for dog = 0.8569<br />
+AP for horse = 0.8728<br />
+AP for motorbike = 0.8435<br />
+AP for person = 0.7883<br />
+AP for pottedplant = 0.5260<br />
+AP for sheep = 0.7583<br />
+AP for sofa = 0.7967<br />
+AP for train = 0.8771<br />
+AP for tvmonitor = 0.7700<br />
+Mean AP = 0.7769<br />
 
 
 
