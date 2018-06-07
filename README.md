@@ -168,7 +168,7 @@ Mean AP = 0.7767<br />
 
 
 
-The bottom was tested in 110000 iterations net paragrams.
+The bottom was tested in 105000 iterations net paragrams.
 
 | Original | Converted weiliu89 weights | From scratch w/o data aug | From scratch w/ data aug |
 |:-:|:-:|:-:|:-:|
